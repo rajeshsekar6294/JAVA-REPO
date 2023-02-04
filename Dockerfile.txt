@@ -1,0 +1,24 @@
+FROM centos:latest
+#create author field
+Maintainer "rajesh"
+#Updating the Centos
+RUN yum update -y
+# Install wget package
+RUN yum install wget -y
+# Install Java Pakage
+RUN yum install java-1.8* -y
+# Install VIM package
+RUN yum install vim -y
+# Install GIT Package
+RUN yum install git -y
+# Install apache tomcat
+RUN wget https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.45/bin/apache-tomcat-9.0.45.tar.gz
+# Extract the tar field
+RUN tar -zxvf apache-tomcat-9.0.45.tar.gz
+# Deploy the war file
+COPY addressbook.war apache-tomcat-9.0.45/webapps/
+# start the service Catalina.sh
+RUN "/apache-tomcat-9.0.45/bin/./startup.sh"
+# create the port number
+EXPOSE 8080 " >> dockerfile
+sudo docker build -t app1:v1
